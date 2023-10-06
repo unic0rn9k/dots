@@ -1,0 +1,184 @@
+{
+    // "layer": "top", // Waybar at top layer
+    "height": 10,
+    "margin-top": 4,
+    "margin-right": 8,
+    "margin-left": 8,
+    "margin-bottom": 6,
+    "modules-left": ["custom/tmux", "custom/layout", "network", "battery", "sway/language"],
+    "modules-right": ["tray", "pulseaudio", "backlight", "memory", "cpu", "custom/clock", "custom/swaync"],
+    "modules-center": ["wlr/workspaces","sway/workspaces", "custom/music"],
+    // Modules configuration
+
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "sway/language": {
+        "format": "{short}",
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "format": "{name}"
+    },
+
+    "wlr/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "🤠",
+            "2": "",
+            "3": ">_",
+            "4": "4 ",
+            "5": "5 ",
+            "6": "6 ",
+            "7": "7 ",
+            "8": "8 ",
+            "9": "9 ",
+            "10": "",
+            "default": ""
+        }
+    },
+    "custom/nm": {
+        "exec": "timeout 5s ~/.config/sway/nm-tray.sh",
+        "escape": true,
+    },
+    "custom/layout": {
+        "exec": "~/.config/hypr/layout.fish",
+        "interval": 1,
+    },
+    "sway/window": {
+      "format": "{}",
+      "max-length": 50
+    },
+    "custom/waybar-media": {
+        "return-type": "json",
+        "exec": "~/.config/waybar/waybar-media.py status",
+        "on-click": "~/.config/waybar/waybar-media.py playpause",
+        "on-scroll-up": "~/.config/waybar/waybar-media.py previous",
+        "on-scroll-down": "~/.config/waybar/waybar-media.py next",
+        "escape": true
+    },
+    "idle_inhibitor": {
+         "format": "{icon}",
+         "format-icons": {
+             "activated"   : "",
+             "deactivated" : "",
+         }
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "custom/clock": {
+        "exec": "date +'%d. %b %H:%M'",
+        "interval": 10
+    },
+
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "interval": 60,
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        "interval": 5,
+        "format": "{percent}% ",
+        "format-alt-click": "click-right",
+        "on-scroll-down": "brightnessctl -c backlight set 5%-",
+        "on-scroll-up": "brightnessctl -c backlight set +5%"
+    },
+    "battery": {
+        "states": {
+          // "good": 95,
+          "warning": 30,
+          "critical": 10
+        },
+        "format-icons": [" ", " ", " ", " ", " "],
+        "format": "{icon}  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged" : "  {capacity}%",
+        "format-alt": "{time}  {icon}",
+        // "format-good": "",
+        // "format-full": "",
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ETH",
+        "format-linked": "{ifname} (No IP) LINK",
+        "format-disconnected": "Silence of the LANs",
+        "interval": 60,
+        "on-click": "exec io.elementary.switchboard"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "{icon} {format_source}",
+        "format-muted": "{format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["  ", "  ", "  "]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "custom/tmux": {
+        "format": "  {}",
+        //"format": "  {}",
+        "interval": 1,
+        "exec": "tmux ls | wc -l",       // # of updates
+        "signal": 8,
+    },
+    "custom/swaync": {
+        "format": "{}",
+        "interval": 2,                     // every hour
+        "exec": "~/.config/waybar/swaync-status.fish",       // # of updates
+        "on-click": "swaync-client -t -sw", // update system
+        "signal": 8,
+    },
+
+    "custom/music": {
+        "format": "{}",
+        "max-length": 20,
+        "interval": 5,
+        "exec": "/home/unic0rn9k/.config/waybar/mediaplayer.sh 2> /dev/null",
+        "tooltip": false,
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl previous",
+        "on-scroll-down": "playerctl next"
+    },
+
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 15,
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-right": "minimize",
+        "on-click-middle": "close"
+    }
+}

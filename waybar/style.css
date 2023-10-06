@@ -1,0 +1,258 @@
+* {
+  border-radius: 8px;
+  font-size: 12px;
+  margin: 0 4px 0 4px;
+  padding: 0;
+  font-family: Mutant, Roboto, "Font Awesome 5 Free";
+  font-weight: 500;
+}
+
+window#waybar {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #c9d1d9;
+}
+
+#workspaces {
+  background-color:  #1C1E26;
+  padding: 0 10px 0 10px;
+  font-size: 8px;
+}
+
+#workspaces button {
+  font-size: 12px;
+  padding: 0 12px 0 12px;
+  background-color: transparent;
+}
+
+#window {
+  background-color: transparent;
+  color: #2e3440;
+  padding-right: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    box-shadow: inherit;
+    color: #5e81ac;
+}
+
+#workspaces button.focused {
+    color: #81a1c1;
+}
+
+#workspaces button.urgent {
+    color: #eb4d4b;
+}
+
+#mpd {
+    padding: 0 10px;
+}
+
+/* WAYBAR-MEDIA */
+
+#custom-waybar-media {
+  background-color:  #3b4252;
+  padding: 0 15px 0 15px;
+  
+}
+
+#custom-waybar-media.playing {
+  background-color:  #5e81ac;
+}
+
+#custom-waybar-media.paused {
+  background-color:  #3b4252;
+}
+
+/* TASKBAR */
+
+#taskbar {
+  background-color:  #1C1E26;
+  padding: 0 12px 0 12px;
+  font-size: 8px;
+  
+  
+}
+
+#taskbar button {
+  padding: 0 10px 0 15px;
+  /* padding-right: 5px; */
+  background-color: transparent;
+}
+
+#taskbar button.active {
+    color: #81a1c1;
+    
+    
+}
+
+#taskbar button.minimized {
+    color: #7c818c;
+    
+    
+}
+
+#taskbar button:hover {
+    box-shadow: inherit;
+    color: #5e81ac;
+    
+    
+}
+
+#cpu, #custom-pacman, #custom-playerctl, #memory, #backlight, #disk, #network, #pulseaudio, #custom-weather, #custom-media, #temperature, #mpd, #custom-clock, #battery, #idle_inhibitor, #custom-power, #tray, #workspaces, #custom-music, #custom-swaync, #custom-tmux, #custom-layout{
+  border: solid;
+  border-width: 1.3px;
+  border-color: #000;
+  box-shadow: inset 0px 1.2 #606167;
+  background-color:  #0d1117;
+  padding: 2px 10px 2px 10px;
+}
+
+#custom-tmux{
+  color: #238636;
+}
+
+#workspaces{
+  margin: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+#workspaces button{
+  padding: 0;
+}
+
+#workspaces button.focused{
+  background-color: rgba(56,139,253,0.15);
+  color: #58a6ff;
+  border-radius: 11;
+  padding: 0px 10px 0px 10px;
+}
+
+#workspaces button:hover{
+  box-shadow: none;
+  background-color: rgba(56,139,253,0.15);
+  color: #58a6ff;
+  border-radius: 11;
+}
+
+#custom-menu{
+  font-size: 12px;
+}
+
+.modules-center,
+.modules-left,
+.modules-right {
+  border-radius: 8px;
+  border-width: 8px;
+  border-color: #000;
+  border: solid;
+}
+
+#network.disconnected{
+    color: #f37f97;
+}
+
+#custom-pacman {
+  padding: 0px 8px 0px 8px;
+  color: #ebcb8b;
+  font-weight: 600;
+}
+
+#custom-playerctl {
+  
+}
+
+#pulseaudio.muted {
+  box-shadow: inset 0px 2px #dbdbbc; 
+  background-color: #b1b190;
+  color: #2a5c45;
+}
+
+#custom-media.custom-vlc {
+  background-color: #1C1E26;
+	padding: 0px 8px 0px 8px;
+	
+}
+
+
+#temperature.critical {
+  color: #eb4d4b;
+}
+
+#tray {
+	padding: 0px 12px 0px 8px;
+}
+
+#battery {
+	padding: 0px 8px 0px 8px;
+}
+
+#battery.charging {
+  background-color: #0c1e37;
+  border: none;
+  box-shadow: inset 0px 0.5px #58a6ff;
+  color: #58a6ff;
+}
+
+@keyframes blink {
+    to {
+        box-shadow: inset 0px 2px #464b5e; 
+        background-color: #1C1E26;
+        color: #ffffff;
+    }
+}
+
+#battery.critical:not(.charging) {
+  background-color: #f37f97;
+  box-shadow: inset 0px 1.2px #FBD8DF;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#idle_inhibitor {
+  
+  background-color: #1C1E26 ;
+  /*font-size: 20px;*/
+  padding-left: 12px;
+  padding-right: 12px;
+  
+  
+  color: #ffffff;
+}
+
+#custom-power {
+  box-shadow: inset 0px 1.2px #FBD8DF; 
+  background-color:  #f37f97;
+  border: none;
+  font-weight: normal;
+  /*font-size: 16px;*/
+  padding: 0px 13px 0px 13px;
+  color: #ffffff;
+}
+
+#mpd.disconnected {
+    background-color: #f53c3c;
+}
+
+#mpd.stopped {
+    background-color: #90b1b1;
+}
+
+#mpd.paused {
+    background-color: #51a37a;
+}
+
