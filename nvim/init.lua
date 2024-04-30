@@ -31,6 +31,12 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  {
+    'folke/zen-mode.nvim',
+    opts = {
+      tmux = {enable = true}
+    }
+  },
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -38,7 +44,17 @@ require('lazy').setup({
   -- Custom
   'justinmk/vim-sneak',
   'github/copilot.vim',
+
   -- oil.nvim -- seams cool
+  {
+    'stevearc/oil.nvim',
+    config = function()
+      require('oil').setup({
+        default_file_explorer = true,
+      })
+    end
+  },
+
   {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
@@ -142,6 +158,16 @@ require('lazy').setup({
   },
 
   {
+    'prettier/vim-prettier',
+    config = function()
+      require('prettier').setup {
+        bin = 'prettierd',
+        filetypes = {'json'}
+      }
+    end
+  },
+
+  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -213,9 +239,11 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
     opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
+      indent = { char = '┊' },
+      -- show_trailing_blankline_indent = false,
     },
+
+    main = "ibl"
   },
 
   -- "gc" to comment visual regions/lines
@@ -501,6 +529,15 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
+  -- Enable rustanalyzer with clippy
+  rust_analyzer = {
+    rust = {
+      checkOnSave = {
+        command = 'clippy',
+      },
+    },
+  },
 }
 
 -- Setup neovim lua configuration
@@ -606,4 +643,5 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.g.copilot_no_tab_map = true
+vim.g.copilot_enabled = false
 vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })

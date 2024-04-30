@@ -1,5 +1,4 @@
 zoxide init fish | source
-gh completion -s fish | source
 
 alias find="fd"
 alias du="dust"
@@ -7,10 +6,13 @@ alias cat="bat"
 alias grep="rg"
 alias icat="kitty +kitten icat"
 alias top="ytop -m"
+alias mi="ollama run dolphin-mistral"
 # alias plantuml="env DISPLAY='wayland-1' plantuml"
 alias ls="exa --icons --git-ignore --git"
 alias tree="ls --tree"
 alias topgrade="cpulimit -l 40 topgrade"
+alias todo="grep '\- \[ \]' ~/notes"
+alias done="grep '\- \[X\]' ~/notes"
 
 alias :q="exit"
 alias ' fs'='exit'
@@ -32,7 +34,11 @@ if [ (tty) = /dev/tty1 ]
     if [ ! -d "$XDG_RUNTIME_DIR" ]
         mkdir -m 0700 "$XDG_RUNTIME_DIR"
     end
-    #dbus-launch --sh-syntax --exit-with-session sway
+
+    eval (ssh-agent -c)
+    set -Ux --erase SSH_AUTH_SOCK $SSH_AUTH_SOCK
+    set -Ux --erase SSH_AGENT_PID $SSH_AGENT_PID
+
     dbus-launch --sh-syntax --exit-with-session Hyprland
 else if [ -z $TMUX ]
     exec tmux && exit
